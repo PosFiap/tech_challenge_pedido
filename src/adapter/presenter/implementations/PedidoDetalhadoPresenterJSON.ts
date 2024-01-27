@@ -1,4 +1,4 @@
-import { IPedidoDetalhadoPresenterJSON, IPedidoDetalhadoPresenterJSONFormat, IProdutoPedidoDetalhadoPresenter } from "../interfaces/IPedidoDetalhadoPresenter";
+import { IPedidoDetalhadoPresenterJSON, IPedidoDetalhadoPresenterJSONFormat } from "../interfaces/IPedidoDetalhadoPresenter";
 import { PedidoDetalhadoPresenter } from "./PedidoDetalhadoPresenter";
 import { CPF } from "./value-objects/CPF";
 import { DataHora } from "./value-objects/DataHora";

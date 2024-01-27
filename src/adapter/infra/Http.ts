@@ -1,5 +1,5 @@
 import https from 'node:https'
-import { HttpRequest, HttpResponse, HttpStatusCode, IHttp } from '../../modules/pagamento'
+import { HttpRequest, HttpResponse, HttpStatusCode, IHttp } from '../../modules/pedido'
 
 export class HttpClient implements IHttp {
   async request<T>(config: HttpRequest): Promise<HttpResponse<T>> {
