@@ -16,7 +16,8 @@ export class PedidoDetalhadoPresenterJSON extends PedidoDetalhadoPresenter imple
             valor_total: (new MoedaReal(valorTotal)).formataMoeda(),
             itens_pedido: this.itensPedido.map((item) => ({
                 nome: item.nome,
-                valor: (new MoedaReal(item.valor)).formataMoeda()
+                valor: (new MoedaReal(item.valor)).formataMoeda(),
+                observacoes: item.observacoes
             }))
         }
 

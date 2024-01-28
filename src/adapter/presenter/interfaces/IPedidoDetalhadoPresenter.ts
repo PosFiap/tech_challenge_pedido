@@ -10,6 +10,7 @@ export interface IPedidoDetalhadoPresenter {
 export interface IProdutoPedidoDetalhadoPresenter {
   nome: string,
   valor: number,
+  observacoes?: string
 }
 
 export interface IPedidoDetalhadoPresenterJSON extends IPedidoDetalhadoPresenter {}
@@ -22,6 +23,7 @@ export interface IPedidoDetalhadoPresenterJSONFormat {
   valor_total: string,
   itens_pedido: Array<{
     nome: string,
-    valor: string
+    valor: string,
+    observacoes?: string
   }>
 }

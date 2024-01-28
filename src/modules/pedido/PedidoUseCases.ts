@@ -1,4 +1,4 @@
-import { ItemListaPedidoAndamentoOutputDTO, ItemProdutoListaPedidoAndamentoOutputDTO } from './dto/ListaPedidoOutputDTO'
+import { ItemListaPedidoOutputDTO, ItemProdutoListaPedidoOutputDTO } from './dto/ListaPedidoOutputDTO'
 import { InserePedidoDTO } from './dto/InserePedidoDTO'
 import { InserePedidoOutputDTO } from './dto/InserePedidoOutputDTO'
 import { Pedido } from './model/Pedido'
@@ -7,22 +7,45 @@ import { IPedidoRepositoryGateway, IPedidoUseCases } from './ports'
 import { CPF } from '../common/value-objects'
 
 export class PedidoUseCases implements IPedidoUseCases {
-  async listaPedidosAndamento (pedidoRepositoryGateway: IPedidoRepositoryGateway): Promise<ItemListaPedidoAndamentoOutputDTO[]> {
+  async listaPedido(pedidoRepositoryGateway: IPedidoRepositoryGateway, codigoPedido: number): Promise<ItemListaPedidoOutputDTO | null> {
+    const pedidoArmazenado = await pedidoRepositoryGateway.obtemPedido(codigoPedido)
+
+    if (!pedidoArmazenado) return null
+
+    const produtosPedido: ItemProdutoListaPedidoOutputDTO[] = pedidoArmazenado.produtosPedido.map(produtoPedido => {
+            return new ItemProdutoListaPedidoOutputDTO(
+              produtoPedido.nome,
+              produtoPedido.valor,
+              produtoPedido.observacoes
+            )
+          })
+
+    const pedido: ItemListaPedidoOutputDTO = new ItemListaPedidoOutputDTO(
+      pedidoArmazenado.codigo!,
+      pedidoArmazenado.CPF,
+      pedidoArmazenado.dataPedido!,
+      produtosPedido
+    )
+
+    return pedido;
+  }
+  async listaPedidos (pedidoRepositoryGateway: IPedidoRepositoryGateway): Promise<ItemListaPedidoOutputDTO[]> {
     const pedidosArmazenados = await pedidoRepositoryGateway.listaPedidos({
       vinculaProdutos: true
     })
 
-    const listaPedidos: ItemListaPedidoAndamentoOutputDTO[] =
+    const listaPedidos: ItemListaPedidoOutputDTO[] =
             pedidosArmazenados.map((pedido: Pedido) => {
-              const produtosPedido: ItemProdutoListaPedidoAndamentoOutputDTO[] =
-                    pedido.produtosPedido.map(produtosPedido => {
-                      return new ItemProdutoListaPedidoAndamentoOutputDTO(
-                        produtosPedido.nome,
-                        produtosPedido.valor,
+              const produtosPedido: ItemProdutoListaPedidoOutputDTO[] =
+                    pedido.produtosPedido.map(produtoPedido => {
+                      return new ItemProdutoListaPedidoOutputDTO(
+                        produtoPedido.nome,
+                        produtoPedido.valor,
+                        produtoPedido.observacoes
                       )
                     })
 
-              return new ItemListaPedidoAndamentoOutputDTO(
+              return new ItemListaPedidoOutputDTO(
                 pedido.codigo!,
                 pedido.CPF,
                 pedido.dataPedido!,

@@ -1,6 +1,8 @@
-import { ItemListaPedidoAndamentoOutputDTO } from '../dto/ListaPedidoOutputDTO'
+import { PedidoOutput } from '../../../adapter/controller/interfaces/IPedidoController'
+import { ItemListaPedidoOutputDTO } from '../dto/ListaPedidoOutputDTO'
 import { IPedidoRepositoryGateway } from './IPedidoRepository'
 
 export interface IListaPedidosUseCase {
-  listaPedidosAndamento(pedidoRepositoryGateway: IPedidoRepositoryGateway): Promise<ItemListaPedidoAndamentoOutputDTO[]>
+  listaPedido(pedidoRepositoryGateway: IPedidoRepositoryGateway, codigoPedido: number): Promise<ItemListaPedidoOutputDTO | null>
+  listaPedidos(pedidoRepositoryGateway: IPedidoRepositoryGateway): Promise<ItemListaPedidoOutputDTO[]>
 }

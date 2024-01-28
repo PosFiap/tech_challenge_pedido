@@ -1,5 +1,5 @@
 import { IPedidoUseCases, InserePedidoDTO, PedidoUseCases, IPedidoRepositoryGateway } from '../../modules/pedido'
-import { IPedidoController, ItemListaPedidosAndamentoOutput, ItemListaPedidosAndamentoProdutoOutput, ListaPedidosAndamentoOutput, RegistraPedidoOutput } from './interfaces/IPedidoController'
+import { IPedidoController, PedidoOutput, ItemListaPedidosProdutoOutput, ListaPedidosOutput, RegistraPedidoOutput } from './interfaces/IPedidoController'
 import { CPF } from '../../modules/common/value-objects'
 import { ProdutoDoPedido } from '../../modules/pedido/model/Produto'
 
@@ -42,21 +42,46 @@ export class PedidoController implements IPedidoController {
     }
   }
 
-  async listaPedidosAndamento (pedidoRepositoryGateway: IPedidoRepositoryGateway): Promise<ListaPedidosAndamentoOutput> {
+  async listaPedidos (pedidoRepositoryGateway: IPedidoRepositoryGateway): Promise<ListaPedidosOutput> {
     try {
-      const listaPedidos = await this.pedidoUseCase.listaPedidosAndamento(pedidoRepositoryGateway);
-      return new ListaPedidosAndamentoOutput(listaPedidos.map((pedido) => {
-        return new ItemListaPedidosAndamentoOutput(
+      const listaPedidos = await this.pedidoUseCase.listaPedidos(pedidoRepositoryGateway);
+      return new ListaPedidosOutput(listaPedidos.map((pedido) => {
+        return new PedidoOutput(
           pedido.codigo,
           pedido.CPF ? new CPF(pedido.CPF) : null,
           pedido.dataPedido,
           pedido.produtosPedido.map((produto) => {
-            return new ItemListaPedidosAndamentoProdutoOutput(
+            return new ItemListaPedidosProdutoOutput(
               produto.nome,
-              produto.valor
+              produto.valor,
+              produto.observacoes
             )
           }));
       }));
+    } catch (err) {
+      console.error(err)
+      throw err
+    }
+  }
+
+  async listaPedido (pedidoRepositoryGateway: IPedidoRepositoryGateway, codigoPedido: number): Promise<PedidoOutput | null> {
+    try {
+      const pedido = await this.pedidoUseCase.listaPedido(pedidoRepositoryGateway, codigoPedido)
+
+      if(!pedido) return null
+
+      return new PedidoOutput(
+          pedido.codigo,
+          pedido.CPF ? new CPF(pedido.CPF) : null,
+          pedido.dataPedido,
+          pedido.produtosPedido.map((produto) => {
+            return new ItemListaPedidosProdutoOutput(
+              produto.nome,
+              produto.valor,
+              produto.observacoes
+            )
+          })
+      )
     } catch (err) {
       console.error(err)
       throw err
