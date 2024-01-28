@@ -33,7 +33,7 @@ export class PrismaPedidoRepositoryGateway implements IPedidoRepositoryGateway {
       pedidoInserido.cpf_cliente,
       pedido.produtosPedido,
       pedidoInserido.codigo,
-      (pedidoInserido as any).data_criacao
+      pedidoInserido.data_criacao
     )
   }
 

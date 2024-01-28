@@ -9,6 +9,6 @@
     "strict": true,                                      
     "skipLibCheck": true,
     "inlineSourceMap": true,
-    "strictNullChecks": false
+    "strictNullChecks": true
   }
 }

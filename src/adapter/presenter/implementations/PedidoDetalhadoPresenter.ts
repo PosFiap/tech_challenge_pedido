@@ -3,7 +3,7 @@ import { IPedidoDetalhadoPresenter, IProdutoPedidoDetalhadoPresenter } from "../
 export abstract class PedidoDetalhadoPresenter implements IPedidoDetalhadoPresenter {    
     constructor(
         readonly codigoPedido: number,
-        readonly itensPedido: Array<IProdutoPedidoDetalhadoPresenter>,
+        readonly itensPedido: IProdutoPedidoDetalhadoPresenter[],
         readonly dataPedido: Date,
         readonly CPFCliente?: string,
         readonly codigoFatura?: string,

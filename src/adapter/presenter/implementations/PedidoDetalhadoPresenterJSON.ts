@@ -9,9 +9,9 @@ export class PedidoDetalhadoPresenterJSON extends PedidoDetalhadoPresenter imple
     format(): IPedidoDetalhadoPresenterJSONFormat {
         const valorTotal = this.valorTotal();
         const json: IPedidoDetalhadoPresenterJSONFormat = {
-            codigo_fatura: this.codigoFatura,
+            codigo_fatura: this.codigoFatura ?? undefined,
             data: new DataHora(this.dataPedido).formataData(),
-            CPF_cliente: this.CPFCliente ? new CPF(this.CPFCliente).formataCPF() : "",
+            CPF_cliente: this.CPFCliente ? new CPF(this.CPFCliente).formataCPF() : undefined,
             numero_pedido: this.codigoPedido.toString(),
             valor_total: (new MoedaReal(valorTotal)).formataMoeda(),
             itens_pedido: this.itensPedido.map((item) => ({
@@ -21,11 +21,6 @@ export class PedidoDetalhadoPresenterJSON extends PedidoDetalhadoPresenter imple
             }))
         }
 
-        if(!this.codigoFatura) {
-            delete json.codigo_fatura;
-        }
-
         return json;
     }
-
 }

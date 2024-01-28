@@ -14,7 +14,6 @@ model Pedido {
   codigo        Int             @id @default(autoincrement())
   cpf_cliente   String?
   data_criacao DateTime @default(now())
-  data_atualizacao DateTime @updatedAt @default(now())
   ProdutoPedido ProdutoPedido[]
 }
 
