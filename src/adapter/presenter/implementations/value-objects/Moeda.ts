@@ -15,7 +15,7 @@ export abstract class Moeda {
     }
 
     private static validaValor(valor: number) {
-        if(valor === null || valor === undefined)
+        if(valor === null || valor === undefined || isNaN(valor))
             return false;
         if(valor < 0)
             return false;
