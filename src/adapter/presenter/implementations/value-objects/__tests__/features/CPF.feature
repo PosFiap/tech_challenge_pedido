@@ -1,31 +1,33 @@
-Feature: Format CPF
+# language: pt
 
-    Scenario: Criando um cpf
-        Given que recebi um cpf 00000000000
-        When eu crio uma instancia do CPF
-        Then chamo o método formatCPF e deveria receber um valor formatado "000.000.000-00"
+Funcionalidade: Format CPF
 
-    Scenario: Criando um cpf sem informar nenhum valor
-        Given que não recebi nenhum cpf
-        When eu crio uma instancia do CPF
-        Then deveria receber um erro "O CPF é inválido"
+    Cenario: Criando um cpf
+        Dado que recebi um cpf 00000000000
+        Quando eu crio uma instancia do CPF
+        Então chamo o método formatCPF e deveria receber um valor formatado "000.000.000-00"
 
-    Scenario: O CPF nulo deve retornar erro
-        Given que recebi cpf nulo null
-        When eu crio uma instancia do CPF
-        Then deveria receber um erro "O CPF é inválido"
+    Cenario: Criando um cpf sem informar nenhum valor
+        Dado que não recebi nenhum cpf
+        Quando eu crio uma instancia do CPF
+        Então deveria receber um erro "O CPF é inválido"
 
-    Scenario: O CPF de tamanho 0 deve retornar erro
-        Given que recebi cpf ""
-        When eu crio uma instancia do CPF
-        Then deveria receber um erro "O CPF é inválido"
+    Cenario: O CPF nulo deve retornar erro
+        Dado que recebi cpf nulo null
+        Quando eu crio uma instancia do CPF
+        Então deveria receber um erro "O CPF é inválido"
 
-    Scenario: O CPF de tamanho 10 deve retornar erro
-        Given que recebi cpf "0000000000"
-        When eu crio uma instancia do CPF
-        Then deveria receber um erro "O CPF é inválido"
+    Cenario: O CPF de tamanho 0 deve retornar erro
+        Dado que recebi cpf ""
+        Quando eu crio uma instancia do CPF
+        Então deveria receber um erro "O CPF é inválido"
 
-    Scenario: O CPF de tamanho 12 deve retornar erro
-        Given que recebi cpf "000000000000"
-        When eu crio uma instancia do CPF
-        Then deveria receber um erro "O CPF é inválido"
+    Cenario: O CPF de tamanho 10 deve retornar erro
+        Dado que recebi cpf "0000000000"
+        Quando eu crio uma instancia do CPF
+        Então deveria receber um erro "O CPF é inválido"
+
+    Cenario: O CPF de tamanho 12 deve retornar erro
+        Dado que recebi cpf "000000000000"
+        Quando eu crio uma instancia do CPF
+        Então deveria receber um erro "O CPF é inválido"
