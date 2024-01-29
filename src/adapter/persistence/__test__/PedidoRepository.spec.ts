@@ -48,7 +48,7 @@ describe("PrismaPedidoRepositoryGateway", () => {
       ).resolves.toEqual([])
     })
 
-    it("Deve retornar uma lista com 3 pedidos", async () => {
+    it("Deve retornar uma lista com pedidos", async () => {
       const { sut } = makeSut()
 
       prismaMock.pedido.findMany.mockResolvedValueOnce(mockPedidoValue)
@@ -68,7 +68,7 @@ describe("PrismaPedidoRepositoryGateway", () => {
       ])
     })
 
-    it("Deve retornar uma lista com 3 pedidos sem os produtos", async () => {
+    it("Deve retornar uma lista com pedidos sem os produtos", async () => {
       const { sut } = makeSut()
 
       prismaMock.pedido.findMany.mockResolvedValueOnce(mockPedidoValue)
