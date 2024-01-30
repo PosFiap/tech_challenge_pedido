@@ -1,4 +1,3 @@
-import { PedidoOutput } from '../../../adapter/controller/interfaces/IPedidoController'
 import { ItemListaPedidoOutputDTO } from '../dto/ListaPedidoOutputDTO'
 import { IPedidoRepositoryGateway } from './IPedidoRepository'
 

@@ -1,13 +1,13 @@
-import { defineFeature, loadFeature } from "jest-cucumber"
-import { PedidoDetalhadoPresenterJSON } from "../PedidoDetalhadoPresenterJSON"
+import { defineFeature, loadFeature } from 'jest-cucumber'
+import { PedidoDetalhadoPresenterJSON } from '../PedidoDetalhadoPresenterJSON'
 
-const feature = loadFeature(`./PedidoDetalhadoPresenterJSON.feature`, {
-  loadRelativePath: true,
+const feature = loadFeature('./PedidoDetalhadoPresenterJSON.feature', {
+  loadRelativePath: true
 })
 
 defineFeature(feature, (test) => {
   const dadoPedido = (given: any, context: any) => {
-    given("os dados de um pedido", (dadosPedido: string) => {
+    given('os dados de um pedido', (dadosPedido: string) => {
       context.obj = JSON.parse(dadosPedido)
     })
   }
@@ -16,14 +16,13 @@ defineFeature(feature, (test) => {
     when: any,
     context: any
   ) => {
-    when("instanciamos e solicitamos a formatação dos dados", () => {
+    when('instanciamos e solicitamos a formatação dos dados', () => {
       context.pedidoDetalhadoPresenterJSON = new PedidoDetalhadoPresenterJSON(
         context.obj.codigo,
         context.obj.produtosDoPedido,
         new Date(context.obj.dataCriacao),
         context.obj.cpf
       )
-
     })
   }
 
@@ -31,14 +30,14 @@ defineFeature(feature, (test) => {
     then: any,
     context: any
   ) => {
-    then("recebemos os dados formatados", (dadosFormatados: string) => {
+    then('recebemos os dados formatados', (dadosFormatados: string) => {
       expect(context.pedidoDetalhadoPresenterJSON.format()).toEqual(
-        JSON.parse(dadosFormatados),
+        JSON.parse(dadosFormatados)
       )
     })
   }
 
-  test("Deve retornar um presenter JSON completo", ({ given, when, then }) => {
+  test('Deve retornar um presenter JSON completo', ({ given, when, then }) => {
     const context = {
       obj: null,
       pedidoDetalhadoPresenterJSON: null
@@ -49,7 +48,7 @@ defineFeature(feature, (test) => {
     entaoReceboDadosFormatados(then, context)
   })
 
-  test("Deve retornar um presenter JSON sem CPF", ({ given, when, then }) => {
+  test('Deve retornar um presenter JSON sem CPF', ({ given, when, then }) => {
     const context = {
       obj: null,
       pedidoDetalhadoPresenterJSON: null

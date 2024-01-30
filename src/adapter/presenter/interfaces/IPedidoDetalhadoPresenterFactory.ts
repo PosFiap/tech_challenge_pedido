@@ -1,10 +1,9 @@
-import { EStatus } from '../../../modules/common/value-objects/EStatus';
-import { IPedidoDetalhadoPresenter, IProdutoPedidoDetalhadoPresenter } from './IPedidoDetalhadoPresenter';
+import { IPedidoDetalhadoPresenter, IProdutoPedidoDetalhadoPresenter } from './IPedidoDetalhadoPresenter'
 
 export interface IPedidoDetalhadoPresenterFactory {
   create(
     codigoPedido: number,
-    itensPedido: Array<IProdutoPedidoDetalhadoPresenter>,
+    itensPedido: IProdutoPedidoDetalhadoPresenter[],
     dataPedido: Date,
     CPFCliente?: string,
     codigoFatura?: string,

@@ -1,12 +1,12 @@
-import { defineFeature, loadFeature } from "jest-cucumber"
-import { CPF } from "../CPF"
+import { defineFeature, loadFeature } from 'jest-cucumber'
+import { CPF } from '../CPF'
 
-const feature = loadFeature("./features/CPF.feature", {
-  loadRelativePath: true,
+const feature = loadFeature('./features/CPF.feature', {
+  loadRelativePath: true
 })
 
 defineFeature(feature, (test) => {
-  test("Criando um cpf", ({ given, when, then }) => {
+  test('Criando um cpf', ({ given, when, then }) => {
     let cpfString: string
     let cpf: CPF
 
@@ -14,7 +14,7 @@ defineFeature(feature, (test) => {
       cpfString = arg0
     })
 
-    when("eu crio uma instancia do CPF", () => {
+    when('eu crio uma instancia do CPF', () => {
       cpf = new CPF(cpfString)
     })
 
@@ -22,16 +22,16 @@ defineFeature(feature, (test) => {
       /^chamo o método formatCPF e deveria receber um valor formatado "(.*)"$/,
       (arg0) => {
         expect(cpf.formataCPF()).toBe(arg0)
-      },
+      }
     )
   })
 
-  test("Criando um cpf sem informar nenhum valor", ({ given, when, then }) => {
+  test('Criando um cpf sem informar nenhum valor', ({ given, when, then }) => {
     let caller: any
 
-    given("que não recebi nenhum cpf", () => { })
+    given('que não recebi nenhum cpf', () => { })
 
-    when("eu crio uma instancia do CPF", () => {
+    when('eu crio uma instancia do CPF', () => {
       // @ts-expect-error
       caller = () => new CPF()
     })
@@ -41,12 +41,12 @@ defineFeature(feature, (test) => {
     })
   })
 
-  test("O CPF nulo deve retornar erro", ({ given, when, then }) => {
+  test('O CPF nulo deve retornar erro', ({ given, when, then }) => {
     let caller: any
 
-    given("que recebi cpf nulo null", () => { })
+    given('que recebi cpf nulo null', () => { })
 
-    when("eu crio uma instancia do CPF", () => {
+    when('eu crio uma instancia do CPF', () => {
       // @ts-expect-error
       caller = () => new CPF()
     })
@@ -56,32 +56,15 @@ defineFeature(feature, (test) => {
     })
   })
 
-  test("O CPF de tamanho 0 deve retornar erro", ({ given, when, then }) => {
+  test('O CPF de tamanho 0 deve retornar erro', ({ given, when, then }) => {
     let cpfString: string
     let caller: any
 
     given('que recebi cpf ""', () => {
-      cpfString
+      cpfString = ''
     })
 
-    when("eu crio uma instancia do CPF", () => {
-      caller = () => new CPF("")
-    })
-
-    then(/^deveria receber um erro "(.*)"$/, (arg0) => {
-      expect(caller).toThrowError(arg0)
-    })
-  })
-
-  test("O CPF de tamanho 10 deve retornar erro", ({ given, when, then }) => {
-    let cpfString: string
-    let caller: any
-
-    given(/^que recebi cpf "(.*)"$/, (arg0) => {
-      cpfString = arg0
-    })
-
-    when("eu crio uma instancia do CPF", () => {
+    when('eu crio uma instancia do CPF', () => {
       caller = () => new CPF(cpfString)
     })
 
@@ -90,7 +73,7 @@ defineFeature(feature, (test) => {
     })
   })
 
-  test("O CPF de tamanho 12 deve retornar erro", ({ given, when, then }) => {
+  test('O CPF de tamanho 10 deve retornar erro', ({ given, when, then }) => {
     let cpfString: string
     let caller: any
 
@@ -98,7 +81,24 @@ defineFeature(feature, (test) => {
       cpfString = arg0
     })
 
-    when("eu crio uma instancia do CPF", () => {
+    when('eu crio uma instancia do CPF', () => {
+      caller = () => new CPF(cpfString)
+    })
+
+    then(/^deveria receber um erro "(.*)"$/, (arg0) => {
+      expect(caller).toThrowError(arg0)
+    })
+  })
+
+  test('O CPF de tamanho 12 deve retornar erro', ({ given, when, then }) => {
+    let cpfString: string
+    let caller: any
+
+    given(/^que recebi cpf "(.*)"$/, (arg0) => {
+      cpfString = arg0
+    })
+
+    when('eu crio uma instancia do CPF', () => {
       caller = () => new CPF(cpfString)
     })
 

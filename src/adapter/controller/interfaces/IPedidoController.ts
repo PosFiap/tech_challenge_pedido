@@ -3,33 +3,33 @@ import { IPedidoRepositoryGateway, IPedidoUseCases } from '../../../modules/pedi
 import { ProdutoDoPedido } from '../../../modules/pedido/model/Produto'
 
 export class RegistraPedidoOutput {
-  constructor(
+  constructor (
     readonly codigoPedido: number,
     readonly cpf: CPF | null,
     readonly dataPedido: Date,
-    readonly produtos: Array<ProdutoDoPedido>
-  ){}
+    readonly produtos: ProdutoDoPedido[]
+  ) {}
 }
 
 export class ListaPedidosOutput {
-  constructor( readonly pedidos: PedidoOutput[] ) {}
+  constructor (readonly pedidos: PedidoOutput[]) {}
 }
 
 export class PedidoOutput {
-    constructor(
-      readonly codigoPedido: number,
-      readonly cpf: CPF | null,
-      readonly dataPedido: Date,
-      readonly produtos: Array<ItemListaPedidosProdutoOutput>
-    ){}
+  constructor (
+    readonly codigoPedido: number,
+    readonly cpf: CPF | null,
+    readonly dataPedido: Date,
+    readonly produtos: ItemListaPedidosProdutoOutput[]
+  ) {}
 }
 
 export class ItemListaPedidosProdutoOutput {
-  constructor(
+  constructor (
     readonly nome: string,
     readonly valor: number,
     readonly observacoes?: string
-  ){}
+  ) {}
 }
 
 export interface IPedidoController {
@@ -38,12 +38,12 @@ export interface IPedidoController {
 
   listaPedidos(
     pedidoRepositoryGateway: IPedidoRepositoryGateway
-  ): Promise<ListaPedidosOutput>;
+  ): Promise<ListaPedidosOutput>
 
   listaPedido(
     pedidoRepositoryGateway: IPedidoRepositoryGateway,
     codigoPedido: number
-  ): Promise<PedidoOutput | null>;
+  ): Promise<PedidoOutput | null>
 
   registraPedido(
     data: { cpf: string | null, produtoPedido: ProdutoDoPedido[] },

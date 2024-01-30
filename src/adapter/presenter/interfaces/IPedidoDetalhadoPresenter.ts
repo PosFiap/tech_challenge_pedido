@@ -1,29 +1,29 @@
 export interface IPedidoDetalhadoPresenter {
-  codigoPedido: number,
+  codigoPedido: number
   CPFCliente?: string
-  itensPedido: Array<IProdutoPedidoDetalhadoPresenter>,
-  dataPedido: Date,
-  codigoFatura?: string,
+  itensPedido: IProdutoPedidoDetalhadoPresenter[]
+  dataPedido: Date
+  codigoFatura?: string
   format(): Object
 }
 
 export interface IProdutoPedidoDetalhadoPresenter {
-  nome: string,
-  valor: number,
+  nome: string
+  valor: number
   observacoes?: string
 }
 
 export interface IPedidoDetalhadoPresenterJSON extends IPedidoDetalhadoPresenter {}
 
 export interface IPedidoDetalhadoPresenterJSONFormat {
-  codigo_fatura?: string,
-  data: string,
-  CPF_cliente?: string,
-  numero_pedido: string,
-  valor_total: string,
+  codigo_fatura?: string
+  data: string
+  CPF_cliente?: string
+  numero_pedido: string
+  valor_total: string
   itens_pedido: Array<{
-    nome: string,
-    valor: string,
+    nome: string
+    valor: string
     observacoes?: string
   }>
 }

@@ -4,8 +4,6 @@
         "project": "./tsconfig.json"
     },
     "rules": {
-      "@typescript-eslint/semi": "off",
-      "@typescript-eslint/member-delimiter-style": "force",
       "@typescript-eslint/method-signature-style": "off",
       "@typescript-eslint/strict-boolean-expressions": "off",
       "@typescript-eslint/no-throw-literal": "off",
@@ -17,6 +15,7 @@
       "@typescript-eslint/ban-ts-comment": "off",
       "promise/param-names": "off",
       "no-case-declarations": "off",
+      "@typescript-eslint/explicit-function-return-type": "off",
       "@typescript-eslint/no-misused-promises": [
         "error",
         {

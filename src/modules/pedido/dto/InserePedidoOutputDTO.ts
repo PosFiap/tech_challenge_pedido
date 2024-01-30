@@ -1,5 +1,5 @@
-import { CPF } from "../../common/value-objects";
-import { ProdutoDoPedido } from "../model/Produto";
+import { CPF } from '../../common/value-objects'
+import { ProdutoDoPedido } from '../model/Produto'
 
 export class InserePedidoOutputDTO {
   constructor (
@@ -7,6 +7,6 @@ export class InserePedidoOutputDTO {
     readonly valor: number,
     readonly CPF: CPF | null,
     readonly dataPedido: Date,
-    readonly itensPedido: Array<ProdutoDoPedido>
+    readonly itensPedido: ProdutoDoPedido[]
   ) {}
 }
