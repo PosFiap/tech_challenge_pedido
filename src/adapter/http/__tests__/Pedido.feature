@@ -25,10 +25,9 @@ Funcionalidade: RotasPedido
     }
     """
     Quando uma request http/post é efetuada
-    Então registra o pedido e retorna o mesmo com seu codigo e codigo da fatura
+    Então registra o pedido e retorna o mesmo com seu codigo
     """
     {
-      "codigo_fatura": "01234",
       "data": "29/01/2024 05:09",
       "CPF_cliente": "410.998.378-98",
       "numero_pedido": "1",

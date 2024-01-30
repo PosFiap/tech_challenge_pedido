@@ -21,8 +21,7 @@ defineFeature(feature, (test) => {
         context.obj.codigo,
         context.obj.produtosDoPedido,
         new Date(context.obj.dataCriacao),
-        context.obj.cpf,
-        context.obj.codigoFatura,
+        context.obj.cpf
       )
 
     })
@@ -51,21 +50,6 @@ defineFeature(feature, (test) => {
   })
 
   test("Deve retornar um presenter JSON sem CPF", ({ given, when, then }) => {
-    const context = {
-      obj: null,
-      pedidoDetalhadoPresenterJSON: null
-    }
-
-    dadoPedido(given, context)
-    quandoCrioInstancia(when, context)
-    entaoReceboDadosFormatados(then, context)
-  })
-
-  test("Deve retornar um presenter JSON sem codigo_fatura", ({
-    given,
-    when,
-    then,
-  }) => {
     const context = {
       obj: null,
       pedidoDetalhadoPresenterJSON: null

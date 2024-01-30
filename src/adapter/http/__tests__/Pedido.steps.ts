@@ -71,7 +71,7 @@ defineFeature(feature, (test) => {
       result = result.body
     });
 
-    then('registra o pedido e retorna o mesmo com seu codigo e codigo da fatura', (response) => {
+    then('registra o pedido e retorna o mesmo com seu codigo', (response) => {
       response = JSON.parse(response)
       response.data = result.data
       expect(result).toEqual(response)
