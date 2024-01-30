@@ -33,8 +33,7 @@ export class PedidoHTTP {
                     pedido.codigoPedido,
                     pedido.produtos,
                     pedido.dataPedido,
-                    pedido.cpf?.valor,
-                    pedido.codigoFatura
+                    pedido.cpf?.valor
                   ).format();
 
                 res.status(201).json(pedidoDetalhado);

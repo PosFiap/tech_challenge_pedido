@@ -5,8 +5,7 @@ export abstract class PedidoDetalhadoPresenter implements IPedidoDetalhadoPresen
         readonly codigoPedido: number,
         readonly itensPedido: IProdutoPedidoDetalhadoPresenter[],
         readonly dataPedido: Date,
-        readonly CPFCliente?: string,
-        readonly codigoFatura?: string,
+        readonly CPFCliente?: string
     ){}
 
     abstract format(): Object;

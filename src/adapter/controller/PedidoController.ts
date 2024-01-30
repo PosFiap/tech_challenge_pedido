@@ -24,15 +24,11 @@ export class PedidoController implements IPedidoController {
       const inputDTO = new InserePedidoDTO(data.cpf, data.produtoPedido)
       const pedidoCompleto = await this.pedidoUseCase.registraPedido(inputDTO, pedidoRepositoryGateway);
 
-      // TODO: chamar serviço de pagamento para gerar fatura e receber o id para redirecionar pro ghateway
-      const codigoFatura = { fatura_id: '01234' } // await servicoPagamentoGateway.obtemFaturaPagamento(pedidoCompleto.valor);
-      
       return new RegistraPedidoOutput(
         pedidoCompleto.codigo,
         pedidoCompleto.CPF,
         pedidoCompleto.dataPedido,
         pedidoCompleto.itensPedido,
-        codigoFatura.fatura_id
       );
 
 

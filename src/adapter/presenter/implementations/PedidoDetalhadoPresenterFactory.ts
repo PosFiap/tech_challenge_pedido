@@ -14,14 +14,12 @@ export abstract class PedidoDetalhadoPresenterFactory implements IPedidoDetalhad
         itensPedido: Array<IProdutoPedidoDetalhadoPresenter>,
         dataPedido: Date,
         CPFCliente?: string,
-        codigoFatura?: string,
     ): IPedidoDetalhadoPresenter {
         return new PedidoDetalhadoPresenterJSON(
             codigoPedido,
             itensPedido,
             dataPedido,
-            CPFCliente,
-            codigoFatura
+            CPFCliente
         )
     }
 

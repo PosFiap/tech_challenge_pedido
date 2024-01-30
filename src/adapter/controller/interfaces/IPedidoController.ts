@@ -7,8 +7,7 @@ export class RegistraPedidoOutput {
     readonly codigoPedido: number,
     readonly cpf: CPF | null,
     readonly dataPedido: Date,
-    readonly produtos: Array<ProdutoDoPedido>,
-    readonly codigoFatura: string,
+    readonly produtos: Array<ProdutoDoPedido>
   ){}
 }
 
