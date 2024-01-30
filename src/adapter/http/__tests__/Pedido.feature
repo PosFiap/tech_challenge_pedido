@@ -52,7 +52,7 @@ Funcionalidade: RotasPedido
     Então então uma lista de pedidos é retornada
     """
     [{
-      "data": "01/11/2023 23:43",
+      "data": "01/11/2023 20:43",
       "CPF_cliente": "012.345.678-90",
       "numero_pedido": "1",
       "valor_total": "R$ 23,80",
@@ -76,7 +76,7 @@ Funcionalidade: RotasPedido
     Então então o pedidos é retornada
     """
     {
-      "data": "01/11/2023 23:43",
+      "data": "01/11/2023 20:43",
       "CPF_cliente": "012.345.678-90",
       "numero_pedido": "1",
       "valor_total": "R$ 23,80",

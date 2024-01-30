@@ -9,7 +9,7 @@
     "dev": "sh ./load-env.sh && npx prisma db push && nodemon ./src/index.ts",
     "build": "tsc",
     "lint": "eslint 'src/**'",
-    "test": "jest --silent",
+    "test": "TZ='UTC' jest --silent",
     "test:watch": "jest -o --watch",
     "test:staged": "jest -o",
     "prisma:generate": "prisma generate",
