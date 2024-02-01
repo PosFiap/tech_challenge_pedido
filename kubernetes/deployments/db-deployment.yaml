@@ -1,26 +1,26 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: postgres-deployment
+  name: postgres-pedidos-deployment
   # namespace: postgres
 spec:
   replicas: 1  
   selector:
     matchLabels:
-      app: postgres
+      app: postgres-pedidos
   template:
     metadata:
       labels:
-        app: postgres
+        app: postgres-pedidos
     spec:
       containers:
-        - name: postgres-container
+        - name: postgres-pedidos-container
           image: postgres
           envFrom:
             - configMapRef:
-                name: db-deployment-configmap
+                name: db-deployment-pedidos-configmap
             - secretRef:
-                name:  postgres-secrets
+                name:  postgres-pedidos-secrets
           ports:
             - containerPort: 5432
           

@@ -1,7 +1,7 @@
 apiVersion: v1
 kind: ConfigMap
 metadata:
-  name: db-deployment-configmap
+  name: db-deployment-pedidos-configmap
   # namespace: postgres-configmap
 data:
   POSTGRES_USER: posfiap
