@@ -41,25 +41,27 @@ export class PrismaPedidoRepositoryGateway implements IPedidoRepositoryGateway {
     const pedidos = await this.prisma.pedido.findMany({
       orderBy: [
         {
-          data_criacao: 'asc',
-        },
+          data_criacao: 'asc'
+        }
       ],
       include: {
         ProdutoPedido: vinculaProdutos
-      } 
+      }
     })
 
     return pedidos.map((pedido) => (new Pedido(
       pedido.cpf_cliente,
-      vinculaProdutos ? pedido.ProdutoPedido.map((produtoPedido) => {
-        return new ProdutoDoPedido(
-          produtoPedido.produto_codigo,
-          produtoPedido.nome,
-          produtoPedido.descricao,
-          produtoPedido.valor,
-          produtoPedido.observacoes ?? undefined
-        )
-      }) : [],
+      vinculaProdutos
+        ? pedido.ProdutoPedido.map((produtoPedido) => {
+          return new ProdutoDoPedido(
+            produtoPedido.produto_codigo,
+            produtoPedido.nome,
+            produtoPedido.descricao,
+            produtoPedido.valor,
+            produtoPedido.observacoes ?? undefined
+          )
+        })
+        : [],
       pedido.codigo,
       pedido.data_criacao
     )))
@@ -75,7 +77,7 @@ export class PrismaPedidoRepositoryGateway implements IPedidoRepositoryGateway {
       }
     })
 
-    if(!pedido) return null
+    if (!pedido) return null
 
     return new Pedido(
       pedido.cpf_cliente ?? null,

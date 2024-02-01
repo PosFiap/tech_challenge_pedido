@@ -1,5 +1,5 @@
-import { EStatusPagamento } from '../../../modules/common/value-objects/EStatusPagamento';
-import { IPagamentoDetalhadoPresenter } from './IPagamentoDetalhadoPresenter';
+import { EStatusPagamento } from '../../../modules/common/value-objects/EStatusPagamento'
+import { IPagamentoDetalhadoPresenter } from './IPagamentoDetalhadoPresenter'
 
 export interface IPagamentoDetalhadoPresenterFactory {
   create(

@@ -10,32 +10,26 @@ export class PedidoController implements IPedidoController {
 
   static create (configuration: string = 'default'): PedidoController {
     if (configuration === 'default') {
-      const service = new PedidoUseCases();
+      const service = new PedidoUseCases()
       return new PedidoController(service)
     }
     throw new Error('Invalid Configuration Setup')
   }
 
-  async registraPedido(
-      data: { cpf: string | null; produtoPedido: ProdutoDoPedido[] },
-      pedidoRepositoryGateway: IPedidoRepositoryGateway,
-    ): Promise<RegistraPedidoOutput> {
+  async registraPedido (
+    data: { cpf: string | null, produtoPedido: ProdutoDoPedido[] },
+    pedidoRepositoryGateway: IPedidoRepositoryGateway
+  ): Promise<RegistraPedidoOutput> {
     try {
       const inputDTO = new InserePedidoDTO(data.cpf, data.produtoPedido)
-      const pedidoCompleto = await this.pedidoUseCase.registraPedido(inputDTO, pedidoRepositoryGateway);
+      const pedidoCompleto = await this.pedidoUseCase.registraPedido(inputDTO, pedidoRepositoryGateway)
 
-      // TODO: chamar serviço de pagamento para gerar fatura e receber o id para redirecionar pro ghateway
-      const codigoFatura = { fatura_id: '01234' } // await servicoPagamentoGateway.obtemFaturaPagamento(pedidoCompleto.valor);
-      
       return new RegistraPedidoOutput(
         pedidoCompleto.codigo,
         pedidoCompleto.CPF,
         pedidoCompleto.dataPedido,
-        pedidoCompleto.itensPedido,
-        codigoFatura.fatura_id
-      );
-
-
+        pedidoCompleto.itensPedido
+      )
     } catch (err) {
       console.error(err)
       throw err
@@ -44,7 +38,7 @@ export class PedidoController implements IPedidoController {
 
   async listaPedidos (pedidoRepositoryGateway: IPedidoRepositoryGateway): Promise<ListaPedidosOutput> {
     try {
-      const listaPedidos = await this.pedidoUseCase.listaPedidos(pedidoRepositoryGateway);
+      const listaPedidos = await this.pedidoUseCase.listaPedidos(pedidoRepositoryGateway)
       return new ListaPedidosOutput(listaPedidos.map((pedido) => {
         return new PedidoOutput(
           pedido.codigo,
@@ -56,8 +50,8 @@ export class PedidoController implements IPedidoController {
               produto.valor,
               produto.observacoes
             )
-          }));
-      }));
+          }))
+      }))
     } catch (err) {
       console.error(err)
       throw err
@@ -68,19 +62,19 @@ export class PedidoController implements IPedidoController {
     try {
       const pedido = await this.pedidoUseCase.listaPedido(pedidoRepositoryGateway, codigoPedido)
 
-      if(!pedido) return null
+      if (!pedido) return null
 
       return new PedidoOutput(
-          pedido.codigo,
-          pedido.CPF ? new CPF(pedido.CPF) : null,
-          pedido.dataPedido,
-          pedido.produtosPedido.map((produto) => {
-            return new ItemListaPedidosProdutoOutput(
-              produto.nome,
-              produto.valor,
-              produto.observacoes
-            )
-          })
+        pedido.codigo,
+        pedido.CPF ? new CPF(pedido.CPF) : null,
+        pedido.dataPedido,
+        pedido.produtosPedido.map((produto) => {
+          return new ItemListaPedidosProdutoOutput(
+            produto.nome,
+            produto.valor,
+            produto.observacoes
+          )
+        })
       )
     } catch (err) {
       console.error(err)

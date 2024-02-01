@@ -1,19 +1,22 @@
-import { IPedidoDetalhadoPresenter, IProdutoPedidoDetalhadoPresenter } from "../interfaces/IPedidoDetalhadoPresenter";
+import {
+  IPedidoDetalhadoPresenter,
+  IProdutoPedidoDetalhadoPresenter
+} from '../interfaces/IPedidoDetalhadoPresenter'
 
-export abstract class PedidoDetalhadoPresenter implements IPedidoDetalhadoPresenter {    
-    constructor(
-        readonly codigoPedido: number,
-        readonly itensPedido: IProdutoPedidoDetalhadoPresenter[],
-        readonly dataPedido: Date,
-        readonly CPFCliente?: string,
-        readonly codigoFatura?: string,
-    ){}
+export abstract class PedidoDetalhadoPresenter
+implements IPedidoDetalhadoPresenter {
+  constructor (
+    readonly codigoPedido: number,
+    readonly itensPedido: IProdutoPedidoDetalhadoPresenter[],
+    readonly dataPedido: Date,
+    readonly CPFCliente?: string
+  ) { }
 
-    abstract format(): Object;
+  abstract format (): Object
 
-    protected valorTotal(): number {
-        return this.itensPedido.reduce((sum, crr) => {
-            return sum += crr.valor
-        }, 0);
-    }
+  protected valorTotal (): number {
+    return this.itensPedido.reduce((sum, crr) => {
+      return (sum += crr.valor)
+    }, 0)
+  }
 }

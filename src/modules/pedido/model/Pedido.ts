@@ -7,7 +7,7 @@ export class Pedido {
     CPF: string | null,
     readonly produtosPedido: ProdutoDoPedido[],
     readonly codigo: number | null,
-    readonly dataPedido: Date | null = null,
+    readonly dataPedido: Date | null = null
   ) {
     this._CPF = CPF ? new CPFVO(CPF) : null
   }

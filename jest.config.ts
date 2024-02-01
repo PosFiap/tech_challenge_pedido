@@ -5,7 +5,20 @@ export default {
   collectCoverage: true,
 
   // An array of glob patterns indicating a set of files for which coverage information should be collected
-  // collectCoverageFrom: undefined,
+  collectCoverageFrom: [
+    "<rootDir>/src/**/*.ts",
+    '!<rootDir>/src/**/I[A-Z]*.ts',
+    '!<rootDir>/src/**/E[A-Z]*.ts',
+    '!<rootDir>/src/**/*Factory.ts',
+    '!<rootDir>/src/**/*DTO.ts',
+    '!<rootDir>/src/**/index.ts',
+    '!<rootDir>/src/prisma/*',
+    '!<rootDir>/src/app.ts',
+    '!<rootDir>/src/config/express/express.ts',
+    "!**/*.spec.ts",
+    "!**/*.test.ts",
+    "!**/*.steps.ts",
+  ],
 
   // The directory where Jest should output its coverage files
   coverageDirectory: "coverage",
@@ -139,8 +152,9 @@ export default {
 
   // The glob patterns Jest uses to detect test files
   testMatch: [
-    "**/__tests__/**/*.[jt]s?(x)",
-    "**/?(*.)+(spec|test).[tj]s?(x)"
+    // "**/__tests__/**/*.[jt]s?(x)",
+    // "**/?(*.)+(spec|test).[tj]s?(x)",
+    "**/*.steps.[tj]s"
   ],
 
   // An array of regexp pattern strings that are matched against all test paths, matched tests are skipped
@@ -159,7 +173,7 @@ export default {
 
   // A map from regular expressions to paths to transformers
   transform: {
-    '.+\\.ts$': 'ts-jest'
+    '.+\\.ts$': 'ts-jest',
   },
 
   // An array of regexp pattern strings that are matched against all source file paths, matched files will skip transformation

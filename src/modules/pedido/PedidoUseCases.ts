@@ -7,18 +7,18 @@ import { IPedidoRepositoryGateway, IPedidoUseCases } from './ports'
 import { CPF } from '../common/value-objects'
 
 export class PedidoUseCases implements IPedidoUseCases {
-  async listaPedido(pedidoRepositoryGateway: IPedidoRepositoryGateway, codigoPedido: number): Promise<ItemListaPedidoOutputDTO | null> {
+  async listaPedido (pedidoRepositoryGateway: IPedidoRepositoryGateway, codigoPedido: number): Promise<ItemListaPedidoOutputDTO | null> {
     const pedidoArmazenado = await pedidoRepositoryGateway.obtemPedido(codigoPedido)
 
     if (!pedidoArmazenado) return null
 
     const produtosPedido: ItemProdutoListaPedidoOutputDTO[] = pedidoArmazenado.produtosPedido.map(produtoPedido => {
-            return new ItemProdutoListaPedidoOutputDTO(
-              produtoPedido.nome,
-              produtoPedido.valor,
-              produtoPedido.observacoes
-            )
-          })
+      return new ItemProdutoListaPedidoOutputDTO(
+        produtoPedido.nome,
+        produtoPedido.valor,
+        produtoPedido.observacoes
+      )
+    })
 
     const pedido: ItemListaPedidoOutputDTO = new ItemListaPedidoOutputDTO(
       pedidoArmazenado.codigo!,
@@ -27,8 +27,9 @@ export class PedidoUseCases implements IPedidoUseCases {
       produtosPedido
     )
 
-    return pedido;
+    return pedido
   }
+
   async listaPedidos (pedidoRepositoryGateway: IPedidoRepositoryGateway): Promise<ItemListaPedidoOutputDTO[]> {
     const pedidosArmazenados = await pedidoRepositoryGateway.listaPedidos({
       vinculaProdutos: true
@@ -51,14 +52,14 @@ export class PedidoUseCases implements IPedidoUseCases {
                 pedido.dataPedido!,
                 produtosPedido
               )
-            });
+            })
 
-    return listaPedidos;
+    return listaPedidos
   }
 
   async registraPedido (data: InserePedidoDTO, pedidoRepositoryGateway: IPedidoRepositoryGateway): Promise<InserePedidoOutputDTO> {
     let pedidoInserido: Pedido
-    let itensDePedidoCompletos = data.produtosPedido;
+    const itensDePedidoCompletos = data.produtosPedido
 
     try {
       pedidoInserido = await pedidoRepositoryGateway.registraPedido(new Pedido(
@@ -66,8 +67,7 @@ export class PedidoUseCases implements IPedidoUseCases {
         itensDePedidoCompletos,
         null,
         null
-      ));
-
+      ))
     } catch (err) {
       if (err instanceof CustomError) throw err
       throw new CustomError(CustomErrorType.RepositoryUnknownError, (err as Error).message)
